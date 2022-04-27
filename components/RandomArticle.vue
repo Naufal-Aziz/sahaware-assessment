@@ -1,0 +1,64 @@
+<template>
+  <div id="random-article">
+    <div v-for="article in articles" :key="article.id">
+      <div id="article-item">
+        <v-img
+          height="205"
+          width="302"
+          :src="article.image ? article.image : 'https://picsum.photos/200/300'"
+        ></v-img>
+        <h2>
+          {{ article.title.length > 25 ? article.title.substring(0, 40)+"..." : article.title }}
+        </h2>
+        <p>
+            {{article.short_description}}
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  data: () => ({
+    articles: [],
+  }),
+  created() {
+    const config = {
+      method: 'get',
+      url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/article?search=&size=3&page=1',
+    }
+    axios(config)
+      .then((response) => {
+        const { content } = response.data
+        this.articles = content
+      })
+      .catch((error) => {
+        alert(error)
+      })
+  },
+}
+</script>
+
+<style scoped>
+#random-article {
+  margin: auto;
+  padding: 0;
+  background: none;
+  display: flex;
+  gap: 20px;
+  align-content: space-between;
+}
+
+#article-item {
+    margin: auto;
+    max-width: 305px;
+    text-align: left;
+}
+
+#article-item h2{
+    margin-top: 16px;
+}
+</style>

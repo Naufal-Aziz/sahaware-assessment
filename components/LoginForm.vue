@@ -2,16 +2,16 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
       <template #activator="{ on, attrs }">
-        <v-list-item link v-bind="attrs" v-on="on">
+        <button link v-bind="attrs" v-on="on">
           <span id="btn-text">Login</span>
-        </v-list-item>
+        </button>
       </template>
 
       <v-card class="dialog-body">
         <div>
           <h2>Login</h2>
           <div id="cta-wrapper">
-            <p>Don't have an account? Create Account</p>
+            <span id="question"> Don't have an account? </span><RegisterForm />
           </div>
         </div>
 
@@ -27,7 +27,7 @@
             ></v-text-field>
             <p>Password</p>
             <v-text-field
-              v-model="Password"
+              v-model="password"
               outlined
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="[rules.required]"
@@ -37,7 +37,14 @@
               @click:append="show1 = !show1"
             ></v-text-field>
 
-            <v-btn :disabled="!valid" color="#ED3237" class="mr-4 login-btn"> Login </v-btn>
+            <v-btn
+              :disabled="!valid"
+              color="#ED3237"
+              class="mr-4 login-btn"
+              @click="userLogin()"
+            >
+              Login
+            </v-btn>
           </v-form>
         </div>
       </v-card>
@@ -46,25 +53,44 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+  name: 'LoginForm',
   data: () => ({
+    dialog: false,
     valid: true,
     user: {},
-    nameRules: [
-      (v) => !!v || 'Name is required',
-      (v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
-    ],
     email: '',
     emailRules: [
       (v) => !!v || 'E-mail is required',
       (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
     ],
     show1: false,
-    Password: '',
+    password: '',
     rules: {
       required: (value) => !!value || 'Required.',
     },
   }),
+  methods: {
+    userLogin() {
+      const config = {
+        method: 'post',
+        url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/auth/login',
+        data: {
+          email: this.email,
+          password: this.password,
+        },
+      }
+      axios(config)
+        .then((response) => {
+          alert(response.data.content[0].token)
+          // console.log(response.data.code);
+        })
+        .catch((error) => {
+          alert(error)
+        })
+    },
+  },
 }
 </script>
 
@@ -73,13 +99,25 @@ export default {
   padding: 80px;
 }
 
+#login-form p {
+  margin: 0;
+}
+
 #cta-wrapper {
-    display: flex;
-    margin-bottom: 48px;
+  display: flex;
+  margin-bottom: 48px;
 }
 
 .login-btn {
-    color: white;
-    text-transform: none;
+  color: white;
+  text-transform: none;
+}
+
+#question {
+  margin-right: 10px;
+}
+
+#btn-text {
+  color: #ed3237;
 }
 </style>
