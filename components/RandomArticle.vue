@@ -5,13 +5,23 @@
         <v-img
           height="205"
           width="302"
-          :src="article.image ? article.image : 'https://picsum.photos/200/300'"
+          :src="
+            article.image.includes('.jpg') || article.image.includes('.png')
+              ? article.image
+              : 'https://picsum.photos/200/300'
+          "
         ></v-img>
-        <h2>
-          {{ article.title.length > 25 ? article.title.substring(0, 40)+"..." : article.title }}
-        </h2>
+        <v-list-item class="pa-0" link :to="'/articles/' + article.title"
+          ><h2>
+            {{
+              article.title.length > 25
+                ? article.title.substring(0, 40) + '...'
+                : article.title
+            }}
+          </h2></v-list-item
+        >
         <p>
-            {{article.short_description}}
+          {{ article.short_description }}
         </p>
       </div>
     </div>
@@ -53,12 +63,12 @@ export default {
 }
 
 #article-item {
-    margin: auto;
-    max-width: 305px;
-    text-align: left;
+  margin: auto;
+  max-width: 305px;
+  text-align: left;
 }
 
-#article-item h2{
-    margin-top: 16px;
+#article-item h2 {
+  margin-top: 16px;
 }
 </style>

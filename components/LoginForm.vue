@@ -83,13 +83,15 @@ export default {
       }
       axios(config)
         .then((response) => {
-          alert(response.data.content[0].token)
+          // alert(response.data.content[0].token)
+          this.$store.dispatch("set_token", response.data.content[0].token);
           // console.log(response.data.code);
         })
         .catch((error) => {
           alert(error)
         })
     },
+
   },
 }
 </script>

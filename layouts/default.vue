@@ -24,8 +24,8 @@
         >
         </div>
         <v-spacer></v-spacer>
-        <LoginForm v-if="guestStatus == true" />
-        <button v-if="guestStatus == false">Log out</button>
+        <LoginForm v-if="token == ''" />
+        <button v-if="token !== ''" @click="user_logout('')">Log out</button>
       </div>
     </v-app-bar>
 
@@ -55,6 +55,11 @@ export default {
       token: (state) => state.token,
       guestStatus: (state) => state.guest
     })
+  },
+  methods: {
+    user_logout(value) {
+          this.$store.dispatch("set_token", value);
+    }
   }
 }
 </script>

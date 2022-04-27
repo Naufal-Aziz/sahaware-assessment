@@ -12,7 +12,7 @@
                 width="302"
                 :src="article.image.includes('.jpg') || article.image.includes('.png') ? article.image : 'https://picsum.photos/200/300'"
               ></v-img>
-              <v-list-item link :to="'/articles/' + article.title"><h2>
+              <v-list-item class="pa-0" link :to="'/articles/' + article.title"><h2>
                 {{
                   article.title.length > 25
                     ? article.title.substring(0, 40) + '...'
@@ -22,7 +22,6 @@
               <p>
                 {{ article.short_description }}
               </p>
-              <!-- <v-list-item link to="/">click</v-list-item> -->
             </div>
           </div>
         </div>
