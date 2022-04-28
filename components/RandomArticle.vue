@@ -87,4 +87,12 @@ export default {
   /* or 24px */
   color: #000000;
 }
+
+@media (max-width: 500px) {
+  #article-item {
+  margin: auto;
+  max-width: 305px;
+  text-align: left;
+}
+}
 </style>

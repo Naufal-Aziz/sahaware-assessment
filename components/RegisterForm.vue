@@ -127,4 +127,21 @@ export default {
 #btn-text {
   color: #ed3237;
 }
+
+@media (max-width: 360px) {
+  .dialog-body {
+    padding: 16px;
+  }
+
+  #cta-wrapper {
+    display: flex;
+    margin-top: 48px;
+  }
+
+  .login-btn {
+    width: 100%;
+    color: white;
+    text-transform: none;
+  }
+}
 </style>

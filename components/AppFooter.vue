@@ -19,5 +19,29 @@ export default {}
 
 .app-footer p {
   margin: 0px auto 0px 80px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #ffffff;
+}
+
+@media (max-width: 360px) {
+  .app-footer {
+    padding: 24px auto 24px 16px;
+  }
+
+  .app-footer p {
+    margin-left: 16px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #ffffff;
+  }
 }
 </style>

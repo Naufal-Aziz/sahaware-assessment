@@ -35,6 +35,12 @@ export default {
   text-align: center;
 }
 
+#hero-image {
+  background-image: url("../static/hero-img.png");
+  width: 1280px;
+  background-position: center;
+}
+
 .center-col h1 {
   font-family: 'Roboto';
   font-style: normal;
@@ -56,5 +62,50 @@ export default {
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 500px) {
+  .container {
+    margin-top: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  #hero-image img{
+  display: none;
+}
+
+  .center-col {
+  padding: 0;
+  text-align: center;
+}
+
+  #hero-image{
+    background-size: 1100px;
+    height: 584px;
+    width: 360px;
+  }
+
+  #article-section {
+    text-align: center;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .center-col h1 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    color: #000000;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+  #random-article {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
 </style>

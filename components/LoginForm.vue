@@ -84,14 +84,13 @@ export default {
       axios(config)
         .then((response) => {
           // alert(response.data.content[0].token)
-          this.$store.dispatch("set_token", response.data.content[0].token);
+          this.$store.dispatch('set_token', response.data.content[0].token)
           // console.log(response.data.code);
         })
         .catch((error) => {
           alert(error)
         })
     },
-
   },
 }
 </script>
@@ -120,6 +119,43 @@ export default {
 }
 
 #btn-text {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
   color: #ed3237;
+}
+
+@media (max-width: 360px) {
+  .dialog-body {
+    padding: 16px;
+  }
+
+  #cta-wrapper {
+    display: flex;
+    margin-top: 48px;
+  }
+
+  #question {
+    margin-right: 5px;
+  }
+
+  #question p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 23px;
+    /* identical to box height, or 144% */
+
+    color: #000000;
+  }
+
+  .login-btn {
+    width: 100%;
+    color: white;
+    text-transform: none;
+  }
 }
 </style>
