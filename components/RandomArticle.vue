@@ -38,7 +38,7 @@ export default {
   created() {
     const config = {
       method: 'get',
-      url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/article?search=&size=3&page=3',
+      url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/article?search=&size=3&page=1',
     }
     axios(config)
       .then((response) => {

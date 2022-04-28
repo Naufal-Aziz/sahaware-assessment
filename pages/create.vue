@@ -1,65 +1,4 @@
 <template>
-  <!-- <div class="main-container">
-    <v-row>
-      <v-col cols="12" sm="2"></v-col>
-      <v-col v-if="token === ''" class="text-center mt-5" cols="12" sm="8">
-        <h1>You must log in to access this page.</h1>
-      </v-col>
-      <v-col v-if="token !== ''" id="main-col" cols="12" sm="8">
-        <div id="create">
-          <v-form
-            ref="form"
-            v-model="valid"
-            class="create-form"
-            lazy-validation
-          >
-            <div>
-              <h1>Create a New Article</h1>
-              <p>Title</p>
-              <v-text-field
-                v-model="title"
-                outlined
-                placeholder="Enter your article title"
-                required
-              ></v-text-field>
-              <v-textarea
-                v-model="description"
-                outlined
-                height="768"
-                placeholder="Write your Story"
-              ></v-textarea>
-            </div>
-            <div>
-              <h1>Publication Detail</h1>
-              <p>Short description</p>
-              <v-textarea
-                v-model="short_description"
-                outlined
-                placeholder="Enter your Article Short Description"
-              ></v-textarea>
-              <p>Thumbnail</p>
-              <v-file-input v-model="image" outlined @change="setImage(image)"></v-file-input>
-              <p>Categories</p>
-              <v-select
-                v-model="select"
-                :items="items"
-                placeholder="Select Category"
-                outlined
-                @change="setCategory(select)"
-              ></v-select>
-              <div id="published-switch">
-                <p>Published</p>
-                <v-switch v-model="switch1"></v-switch>
-              </div>
-              <v-btn id="publish-btn" @click="publishArticle()">Publish</v-btn>
-            </div>
-          </v-form>
-        </div>
-      </v-col>
-
-      <v-col cols="12" sm="2"> </v-col>
-    </v-row>
-  </div> -->
   <div class="container">
     <div class="left-col"></div>
     <!-- MAIN -->
@@ -68,7 +7,7 @@
     </div>
     <div v-if="token !== ''" class="center-col">
       <div id="create">
-        <v-form ref="form" v-model="valid" class="create-form" lazy-validation>
+        <v-form ref="form" v-model="valid" class="create-form">
           <div>
             <h1>Create a New Article</h1>
             <p>Title</p>
@@ -83,7 +22,7 @@
               v-model="description"
               :rules="descRules"
               outlined
-              height="768"
+              height="500"
               placeholder="Write your Story"
               required
             ></v-textarea>
@@ -95,7 +34,6 @@
               v-model="short_description"
               :rules="descRules"
               outlined
-              autofocus
               placeholder="Enter your Article Short Description"
               required
             ></v-textarea>
@@ -159,6 +97,13 @@ export default {
   },
   created() {
     this.categories()
+    console.log(this.valid)
+    this.title = ''
+    this.description = ''
+    this.short_description = ''
+    this.image = null
+    this.selectedImage = ''
+    this.select = ''
   },
   methods: {
     categories() {
@@ -187,27 +132,38 @@ export default {
     },
     publishArticle() {
       if (this.valid === true) {
+        const data = new FormData()
+        data.append('title', this.title)
+        data.append('short_description', this.short_description)
+        data.append('description', this.description)
+        data.append('category_id', this.categoryDict[this.select])
+        data.append('is_visible', this.switch1)
+        data.append(
+          'image', this.selectedImage
+        )
         const config = {
           method: 'post',
           url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/article/create',
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
-          data: {
-            title: this.title,
-            short_description: this.short_description,
-            description: this.description,
-            category_id: this.categoryDict[this.select],
-            is_visible: this.switch1,
-            image: this.selectedImage,
-          },
+          data
+          // data: {
+          //   title: this.title,
+          //   short_description: this.short_description,
+          //   description: this.description,
+          //   category_id: this.categoryDict[this.select],
+          //   is_visible: this.switch1,
+          //   image: this.selectedImage,
+          // },
         }
         axios(config)
           .then((response) => {
             alert(response.data.message)
+            console.log(config.data)
           })
           .catch((error) => {
-            alert(error + 'Please make sure all field is filled')
+            alert(error)
           })
       }
     },
@@ -249,8 +205,40 @@ export default {
   color: white;
 }
 
-/* #create {
-  margin-top: 80px;
+@media (max-width: 360px) {
+  .container {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .create-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .create-form h1 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #000000;
+  }
+
+  #published-switch {
+    display: flex;
+    gap: 200px;
+    align-items: center;
+    align-content: space-between;
+  }
+
+  #publish-btn {
+    text-transform: none;
+    background-color: #ed3237;
+    color: white;
+    width: 100%;
+  }
 }
- */
 </style>

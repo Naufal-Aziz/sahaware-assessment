@@ -9,7 +9,7 @@
           </h2>
           <h3>{{ singleArticle.short_description }}</h3>
           <v-img
-            class="my-2"
+            class="my-2 photo"
             height="393"
             width="628"
             :src="
@@ -101,5 +101,57 @@ export default {
   line-height: 150%;
 
   color: #000000;
+}
+
+@media (max-width: 360px) {
+  .container {
+    margin-top: 16px;
+    width: 360px;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  #article-item h2 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #000000;
+  }
+
+  #article-item h3 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 150%;
+    /* or 27px */
+
+    color: #000000;
+  }
+
+  #article-item p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    /* or 27px */
+
+    color: #000000;
+  }
+
+  .photo {
+    height: 225px !important;
+    width: 360px !important;
+  }
+
+  #article-item {
+    width: 328px;
+    margin: auto;
+    text-align: left;
+  }
 }
 </style>

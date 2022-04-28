@@ -2,7 +2,9 @@
   <v-app id="inspire">
     <div class="nav-bar">
       <div class="logo">
-        <img src="../static/logo.png" alt="" />
+        <router-link to="/">
+          <img src="../static/logo.png" alt="" />
+        </router-link>
       </div>
       <div class="routes">
         <router-link
@@ -24,12 +26,12 @@
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-navigation-drawer v-model="drawer" app light width="500">
           <div>
-            <div class="header">
-              <img src="../static/logo.png" alt="" />
-              <v-btn text color="white">
-                <v-icon color="black" @click="drawer = !drawer"
-                  >mdi-close</v-icon
-                >
+            <div class="items">
+              <a href="/">
+                <img src="../static/logo.png" alt="" />
+              </a>
+              <v-btn text color="white" @click="drawer = !drawer">
+                <v-icon color="black">mdi-close</v-icon>
               </v-btn>
             </div>
             <v-btn
@@ -43,7 +45,10 @@
               <span class="list-link">{{ link.title }}</span>
             </v-btn>
           </div>
-          <LoginForm />
+          <LoginForm v-if="token == ''" />
+          <v-btn v-if="token !== ''" text block @click="user_logout('')">
+            <span id="btn-text">Log out</span>
+          </v-btn>
         </v-navigation-drawer>
       </div>
     </div>
@@ -95,15 +100,14 @@ export default {
   display: none;
 }
 
-.nav-drawer img {
-  align-self: center;
-}
-
-.nav-drawer .header {
+.nav-drawer .items {
   display: grid;
   grid-template-columns: 6fr 1fr;
   padding: 24px;
   margin-bottom: 20%;
+}
+.nav-drawer img {
+  align-self: center;
 }
 
 .list-link {
@@ -149,6 +153,16 @@ export default {
   margin-left: 20px;
 }
 
+#btn-text {
+  text-transform: none;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: #ed3237;
+}
+
 .active {
   color: red;
 }
@@ -159,7 +173,7 @@ export default {
   }
   .nav-drawer {
     display: block;
-  } 
+  }
 
   #nav-link {
     display: none;

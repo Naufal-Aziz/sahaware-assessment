@@ -84,4 +84,22 @@ export default {
 #article-item h2 {
   margin-top: 16px;
 }
+
+@media (max-width: 360px) {
+  .container {
+  margin-top: 16px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#random-article {
+  padding: 0;
+  margin: auto;
+  background: none;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+}
 </style>

@@ -145,7 +145,7 @@ export default {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 23px;
     /* identical to box height, or 144% */
 
