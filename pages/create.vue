@@ -97,7 +97,6 @@ export default {
   },
   created() {
     this.categories()
-    console.log(this.valid)
     this.title = ''
     this.description = ''
     this.short_description = ''
@@ -160,7 +159,6 @@ export default {
         axios(config)
           .then((response) => {
             alert(response.data.message)
-            console.log(config.data)
           })
           .catch((error) => {
             alert(error)

@@ -109,7 +109,7 @@ export default {
 .nav-drawer img {
   align-self: center;
 }
-
+/*  */
 .list-link {
   padding: 16px 150px;
   text-transform: none;

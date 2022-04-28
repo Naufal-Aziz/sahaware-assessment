@@ -90,7 +90,6 @@ export default {
     axios(config)
       .then((response) => {
         alert(response.data.code)
-        // console.log(response.data.code);
       })
       .catch((error) => {
         alert(error)
