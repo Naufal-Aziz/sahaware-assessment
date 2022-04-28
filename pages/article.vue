@@ -76,7 +76,7 @@ export default {
 }
 
 #article-item {
-  margin: auto;
+  margin: 0 auto;
   max-width: 305px;
   text-align: left;
 }
@@ -86,7 +86,7 @@ export default {
 }
 
 /* media type */
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .container {
   margin-top: 16px;
   padding: 0;

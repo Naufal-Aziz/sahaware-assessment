@@ -59,6 +59,7 @@ export default {
 
 <style scoped>
 .container {
+  padding: 0;
   margin-top: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -107,7 +108,7 @@ export default {
   color: #000000;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .container {
     margin-top: 16px;
     width: 360px;
@@ -116,7 +117,7 @@ export default {
   }
 
   .center-col {
-    max-width: 360px;
+    max-width: 400px;
   }
   #article-item h2 {
     font-family: 'Roboto';

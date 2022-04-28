@@ -89,7 +89,7 @@ export default {
   color: #000000;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   #article-item {
   margin: auto;
   max-width: 305px;

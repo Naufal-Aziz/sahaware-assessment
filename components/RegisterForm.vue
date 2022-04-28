@@ -127,7 +127,7 @@ export default {
   color: #ed3237;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .dialog-body {
     padding: 16px;
   }

@@ -24,7 +24,7 @@
       </div>
       <div class="nav-drawer">
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-navigation-drawer v-model="drawer" app light width="360">
+        <v-navigation-drawer v-model="drawer" app light width="400">
           <div>
             <div class="items">
               <a href="/">
@@ -167,7 +167,7 @@ export default {
   color: red;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .nav-bar {
     padding: 20px 16px;
   }

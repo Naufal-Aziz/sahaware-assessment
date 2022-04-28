@@ -199,7 +199,7 @@ export default {
   color: white;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .container {
     margin-top: 16px;
     display: grid;

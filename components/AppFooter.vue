@@ -28,7 +28,7 @@ export default {}
   color: #ffffff;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
   .app-footer {
     padding: 24px auto 24px 16px;
   }
