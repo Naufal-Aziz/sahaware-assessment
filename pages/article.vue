@@ -85,6 +85,7 @@ export default {
   margin-top: 16px;
 }
 
+/* media type */
 @media (max-width: 360px) {
   .container {
   margin-top: 16px;
