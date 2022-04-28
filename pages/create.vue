@@ -137,27 +137,23 @@ export default {
         data.append('description', this.description)
         data.append('category_id', this.categoryDict[this.select])
         data.append('is_visible', this.switch1)
-        data.append(
-          'image', this.selectedImage
-        )
+        data.append('image', this.selectedImage)
         const config = {
           method: 'post',
           url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/article/create',
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
-          data
-          // data: {
-          //   title: this.title,
-          //   short_description: this.short_description,
-          //   description: this.description,
-          //   category_id: this.categoryDict[this.select],
-          //   is_visible: this.switch1,
-          //   image: this.selectedImage,
-          // },
+          data,
         }
         axios(config)
           .then((response) => {
+            this.title = ''
+            this.description = ''
+            this.short_description = ''
+            this.image = null
+            this.selectedImage = ''
+            this.select = ''
             alert(response.data.message)
           })
           .catch((error) => {
