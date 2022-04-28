@@ -24,7 +24,7 @@
       </div>
       <div class="nav-drawer">
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-navigation-drawer v-model="drawer" app light width="500">
+        <v-navigation-drawer v-model="drawer" app light width="360">
           <div>
             <div class="items">
               <a href="/">

@@ -64,7 +64,7 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 360px) {
   .container {
     margin-top: 0;
     padding: 0;
