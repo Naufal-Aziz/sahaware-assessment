@@ -39,7 +39,7 @@
           :key="link.id"
           :to="link.route"
         >
-          {{ link.title }}</router-link
+          <span :class="[$route.path == link.route ? 'active' : '']">{{ link.title }}</span></router-link
         >
       </div>
       <div class="login">
@@ -121,5 +121,9 @@ export default {
   text-decoration: none;
   color: black;
   margin-left: 20px;
+}
+
+.active {
+  color: red;
 }
 </style>
