@@ -32,7 +32,10 @@ export default {
 }
 
 .center-col {
+  display: grid;
+  grid-template-columns: 1fr;
   text-align: center;
+
 }
 
 #hero-image {

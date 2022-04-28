@@ -64,6 +64,10 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+.center-col {
+  max-width: 628px;
+}
+
 #article-item {
   margin: auto;
   text-align: left;
@@ -111,6 +115,9 @@ export default {
     grid-template-columns: 1fr;
   }
 
+  .center-col {
+    max-width: 360px;
+  }
   #article-item h2 {
     font-family: 'Roboto';
     font-style: normal;
