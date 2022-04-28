@@ -31,15 +31,12 @@
               <h1>Publication Detail</h1>
               <p>Short description</p>
               <v-textarea
-              v-model="short_description"
-              outlined
-              placeholder="Enter your Article Short Description"
+                v-model="short_description"
+                outlined
+                placeholder="Enter your Article Short Description"
               ></v-textarea>
               <p>Thumbnail</p>
-              <v-file-input
-              v-model="image"
-              outlined
-              ></v-file-input>
+              <v-file-input v-model="image" outlined @change="setImage(image)"></v-file-input>
               <p>Categories</p>
               <v-select
                 v-model="select"
@@ -52,7 +49,7 @@
                 <p>Published</p>
                 <v-switch v-model="switch1"></v-switch>
               </div>
-              <v-btn id="publish-btn">Publish</v-btn>
+              <v-btn id="publish-btn" @click="publishArticle()">Publish</v-btn>
             </div>
           </v-form>
         </div>
@@ -64,6 +61,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import axios from 'axios'
 export default {
   name: 'LoginForm',
@@ -76,8 +74,14 @@ export default {
     description: '',
     short_description: '',
     image: null,
+    selectedImage: '',
     select: '',
   }),
+  computed: {
+    ...mapState({
+      token: (state) => state.token,
+    }),
+  },
   created() {
     this.categories()
   },
@@ -95,20 +99,41 @@ export default {
             this.items.push(content[i].title)
             this.categoryDict[content[i].title] = content[i].id
           }
-          // this.items = content.title;
-          // console.log(this.categoryDict)
-
-          // const cid = this.categoryDict[this.select]
-
-          // api
         })
         .catch((error) => {
           alert(error)
         })
     },
+    setImage(value) {
+      this.selectedImage = value
+    },
     setCategory(value) {
       this.select = value
       // console.log(this.categoryDict[this.select])
+    },
+    publishArticle() {
+      const config = {
+        method: 'post',
+        url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/article/create',
+        headers: {
+          Authorization: `Bearer ${this.token}`
+        },
+        data: {
+          title: this.title,
+          short_description: this.short_description,
+          description: this.description,
+          category_id: this.categoryDict[this.select],
+          is_visible: this.switch1,
+          image: `http://149.129.247.151:9000/${this.selectedImage}`,
+        },
+      }
+      axios(config)
+        .then((response) => {
+          alert(response.data.message)
+        })
+        .catch((error) => {
+          alert(error)
+        })
     },
   },
 }
