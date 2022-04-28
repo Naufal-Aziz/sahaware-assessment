@@ -9,7 +9,31 @@
       <div id="article-section">
         <div></div>
         <div id="random-article">
-          <RandomArticle />
+          <div v-for="article in articles" :key="article.id">
+            <div id="article-item">
+              <v-img
+                height="205"
+                width="302"
+                :src="
+                  article.image.includes('.jpg') ||
+                  article.image.includes('.png') ||
+                  article.image.includes('.jpeg')
+                    ? article.image
+                    : 'https://picsum.photos/200/300'
+                "
+              ></v-img>
+              <v-list-item class="pa-0" link :to="'/articles/' + article.title"
+                ><h2>
+                  {{
+                    article.title.length > 25
+                      ? article.title.substring(0, 40) + '...'
+                      : article.title
+                  }}
+                </h2></v-list-item
+              >
+              <p>{{ article.short_description }}</p>
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
@@ -19,8 +43,26 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'IndexPage',
+  data: () => ({
+    articles: [],
+  }),
+  created() {
+    const config = {
+      method: 'get',
+      url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/article?search=&size=3&page=1',
+    }
+    axios(config)
+      .then((response) => {
+        const { content } = response.data
+        this.articles = content
+      })
+      .catch((error) => {
+        alert(error)
+      })
+  }
 }
 </script>
 
@@ -62,17 +104,39 @@ export default {
 
 #random-article {
   margin: auto;
+  padding: 3rem;
+  background: none;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  align-content: space-between;
+}
+
+#article-item {
+  margin: 0 auto;
+  max-width: 305px;
+  text-align: left;
+}
+
+#article-item h2 {
+  margin-top: 16px;
 }
 
 @media (max-width: 400px) {
-  .container {
-    margin-top: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-  }
+    .container {
+  margin-top: 16px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#random-article {
+  padding: 0;
+  margin: auto;
+  background: none;
+  display: grid;
+  grid-template-columns: 1fr;
+}
 
   #hero-image img {
     display: none;
@@ -104,10 +168,6 @@ export default {
     color: #000000;
     margin-top: 32px;
     margin-bottom: 32px;
-  }
-  #random-article {
-    display: grid;
-    grid-template-columns: 1fr;
   }
 }
 
