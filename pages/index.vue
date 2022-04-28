@@ -1,22 +1,20 @@
 <template>
-  <div class="main-container">
-    <v-row>
-      <v-col cols="12" sm="2"> </v-col>
-
-      <v-col id="main-col" cols="12" sm="8">
-        <div id="hero-image">
-          <img src="../static/hero-img.png" alt="" width="100%"/>
+  <div class="container">
+    <div class="left-col"></div>
+    <div class="center-col">
+      <div id="hero-image">
+        <img src="../static/hero-img.png" alt="" width="100%" />
+      </div>
+      <h1>Article</h1>
+      <div id="article-section">
+        <div></div>
+        <div id="random-article">
+          <RandomArticle />
         </div>
-        <div id="article-section">
-          <h1>Article</h1>
-          <div id="random-article">
-            <RandomArticle />
-          </div>
-        </div>
-      </v-col>
-
-      <v-col cols="12" sm="2"> </v-col>
-    </v-row>
+        <div></div>
+      </div>
+    </div>
+    <div class="right-col"></div>
   </div>
 </template>
 
@@ -28,34 +26,35 @@ export default {
 
 <style scoped>
 .container {
-  width: 80%;
-  margin: auto;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
 }
 
-#main-col {
-  margin-top: 80px;
-}
-
-#hero-image {
-  margin-bottom: 80px;
-}
-
-#article-section {
+.center-col {
   text-align: center;
-  margin-bottom: 114px;
-
 }
 
-#article-section h1 {
+.center-col h1 {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
   font-size: 48px;
   line-height: 56px;
+  margin-top: 40px;
   margin-bottom: 48px;
 }
 
+#article-section {
+  text-align: center;
+  margin-bottom: 114px;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+
 #random-article {
-  display: flex;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 </style>

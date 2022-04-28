@@ -1,34 +1,34 @@
 <template>
-  <div class="main-container">
-    <v-row>
-      <v-col cols="12" sm="3"> </v-col>
-
-      <v-col id="main-col" cols="12" sm="6">
-        <div id="random-article">
-          <div v-for="article in articles" :key="article.id">
-            <div id="article-item">
-              <v-img
-                height="205"
-                width="302"
-                :src="article.image.includes('.jpg') || article.image.includes('.png') ? article.image : 'https://picsum.photos/200/300'"
-              ></v-img>
-              <v-list-item class="pa-0" link :to="'/articles/' + article.title"><h2>
+  <div class="container">
+    <div class="left-col"></div>
+    <div class="center-col">
+      <div id="random-article">
+        <div v-for="article in articles" :key="article.id">
+          <div id="article-item">
+            <v-img
+              height="205"
+              width="302"
+              :src="
+                article.image.includes('.jpg') || article.image.includes('.png') || article.image.includes('.jpeg')
+                  ? article.image
+                  : 'https://picsum.photos/200/300'
+              "
+            ></v-img>
+            <v-list-item class="pa-0" link :to="'/articles/' + article.title"
+              ><h2>
                 {{
                   article.title.length > 25
                     ? article.title.substring(0, 40) + '...'
                     : article.title
                 }}
-              </h2></v-list-item>
-              <p>
-                {{ article.short_description }}
-              </p>
-            </div>
+              </h2></v-list-item
+            >
+            <p>{{ article.short_description }}</p>
           </div>
         </div>
-      </v-col>
-
-      <v-col cols="12" sm="3"> </v-col>
-    </v-row>
+      </div>
+    </div>
+    <div class="right-col"></div>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
   created() {
     const config = {
       method: 'get',
-      url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/article?search=&size=9&page=1',
+      url: 'https://restify-sahaware-boilerplate.herokuapp.com/api/article?search=&size=9&page=2',
     }
     axios(config)
       .then((response) => {
@@ -58,6 +58,13 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+
+
 #random-article {
   margin: auto;
   padding: 3rem;

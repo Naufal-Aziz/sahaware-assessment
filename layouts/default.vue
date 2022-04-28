@@ -9,11 +9,30 @@
       <LoginForm />
     </v-navigation-drawer> -->
 
-    <v-app-bar app class="app-bar" color="white">
       <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
+    <!-- <v-app-bar app class="app-bar" color="white">
       <img src="../static/logo.png" alt="" />
       <div id="navigations">
         <div>
+          <router-link
+            v-for="link in links"
+            id="nav-link"
+            :key="link.id"
+            :to="link.route"
+          >
+            {{ link.title }}</router-link
+          >
+        </div>
+        <v-spacer></v-spacer>
+        <LoginForm v-if="token == ''" />
+        <button v-if="token !== ''" @click="user_logout('')">Log out</button>
+      </div>
+    </v-app-bar> -->
+    <div class="nav-bar">
+      <div class="logo">
+        <img src="../static/logo.png" alt="" />
+      </div>
+      <div class="routes">
         <router-link
           v-for="link in links"
           id="nav-link"
@@ -22,12 +41,12 @@
         >
           {{ link.title }}</router-link
         >
-        </div>
-        <v-spacer></v-spacer>
+      </div>
+      <div class="login">
         <LoginForm v-if="token == ''" />
         <button v-if="token !== ''" @click="user_logout('')">Log out</button>
       </div>
-    </v-app-bar>
+    </div>
 
     <v-main>
       <router-view></router-view>
@@ -37,7 +56,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 import AppFooter from '../components/AppFooter.vue'
 export default {
   name: 'NuxtApp',
@@ -53,18 +72,39 @@ export default {
   computed: {
     ...mapState({
       token: (state) => state.token,
-      guestStatus: (state) => state.guest
-    })
+      guestStatus: (state) => state.guest,
+    }),
   },
   methods: {
     user_logout(value) {
-          this.$store.dispatch("set_token", value);
-    }
-  }
+      this.$store.dispatch('set_token', value)
+    },
+  },
 }
 </script>
 
 <style scoped>
+.nav-bar {
+  padding: 32px 80px;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  border-bottom: 1px solid rgb(190, 190, 190);
+}
+
+.logo {
+  display: grid;
+  align-self: center;
+  justify-self: center;
+}
+
+.routes {
+  background-color: white;
+}
+
+.login {
+  background-color: white;
+}
+
 .app-bar {
   background-color: white;
   color: black;
